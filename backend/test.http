@@ -1,0 +1,2 @@
+### DELETE A MONASTERY
+DELETE http://localhost:5000/monasteries/68baae7d8946e25e446d09a8
