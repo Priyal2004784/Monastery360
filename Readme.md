@@ -148,4 +148,5 @@ The main site at `http://localhost:3000` is where you can explore the monasterie
     ```
 3.  In the admin panel, you can add new monasteries, edit existing ones, and delete them from the database. All changes will be reflected on the main website in real-time.
 
-testing for git
+Contributor
+Priyal
