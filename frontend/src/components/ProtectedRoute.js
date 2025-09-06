@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './Admin.css'; // <-- This is the new line you are adding
 
 function ProtectedRoute({ children }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);

@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './Admin.css'; // <-- This is the new line you are adding
 
-const initialFormState = { 
-  name: '', 
-  district: '', 
-  history: '', 
-  lat: '', 
-  lng: '', 
-  tags: '', 
-  panoImage_url: '' 
+const initialFormState = {
+  name: '',
+  district: '',
+  history: '',
+  lat: '',
+  lng: '',
+  tags: '',
+  panoImage_url: ''
 };
 
 function AdminPanel() {
@@ -22,8 +23,8 @@ function AdminPanel() {
       .catch(error => console.error("Error fetching monasteries:", error));
   };
 
-  useEffect(() => { 
-    fetchMonasteries(); 
+  useEffect(() => {
+    fetchMonasteries();
   }, []);
 
   const handleInputChange = (e) => {
@@ -64,8 +65,8 @@ function AdminPanel() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const monasteryData = {
-      name: formData.name, 
-      district: formData.district, 
+      name: formData.name,
+      district: formData.district,
       history: formData.history,
       coordinates: { lat: parseFloat(formData.lat), lng: parseFloat(formData.lng) },
       tags: formData.tags.split(',').map(tag => tag.trim()).filter(Boolean),
@@ -77,10 +78,10 @@ function AdminPanel() {
       : axios.post('http://localhost:5000/monasteries/add', monasteryData);
 
     request.then(() => {
-        alert(`Monastery ${editingId ? 'updated' : 'added'} successfully!`);
-        fetchMonasteries();
-        cancelEdit();
-      })
+      alert(`Monastery ${editingId ? 'updated' : 'added'} successfully!`);
+      fetchMonasteries();
+      cancelEdit();
+    })
       .catch(err => alert(`Error: Failed to ${editingId ? 'update' : 'add'} monastery.`));
   };
 
@@ -103,7 +104,7 @@ function AdminPanel() {
           <textarea name="history" value={formData.history} onChange={handleInputChange} placeholder="History" required />
           <input name="tags" value={formData.tags} onChange={handleInputChange} placeholder="Tags (comma-separated)" />
           <input name="panoImage_url" value={formData.panoImage_url} onChange={handleInputChange} placeholder="360 Image URL (optional)" />
-          
+
           <div className="form-actions">
             <button type="submit" className="cta-button primary">
               {editingId ? 'Update Monastery' : 'Add Monastery'}

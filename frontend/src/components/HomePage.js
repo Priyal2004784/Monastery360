@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Map from './Map';
+import './HomePage.css'; // <-- This is the new line you are adding
 
 function HomePage() {
   const [monasteries, setMonasteries] = useState([]);

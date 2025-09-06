@@ -1,0 +1,70 @@
+/* === FOOTER === */
+.footer {
+    background-color: var(--color-footer-bg);
+    color: #a0a0a0;
+    padding-top: 60px;
+    font-size: 0.9rem;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    padding-bottom: 40px;
+}
+
+.footer-brand {
+    font-family: var(--font-heading);
+    color: var(--color-surface);
+    font-size: 1.5rem;
+    margin: 0 0 1rem 0;
+}
+
+.footer-tagline,
+.footer-column p {
+    color: #a0a0a0;
+    line-height: 1.6;
+}
+
+.social-links {
+    margin-top: 1.5rem;
+    display: flex;
+    gap: 15px;
+}
+
+.social-links span {
+    font-weight: 600;
+    color: var(--color-surface);
+}
+
+.footer-column h4 {
+    color: var(--color-surface);
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    font-family: var(--font-body);
+    font-weight: 600;
+}
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-column ul li {
+    margin-bottom: 10px;
+}
+
+.footer-column ul a {
+    color: #a0a0a0;
+}
+
+.footer-column ul a:hover {
+    color: var(--color-surface);
+}
+
+.footer-bottom {
+    padding: 20px 0;
+    border-top: 1px solid #444;
+    text-align: center;
+}

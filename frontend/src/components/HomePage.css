@@ -1,0 +1,213 @@
+/* === HERO SECTION === */
+.hero-section {
+    position: relative;
+    height: 80vh;
+    color: var(--color-surface);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url('https://as1.ftcdn.net/jpg/03/77/74/82/1000_F_377748272_90xLI43qaegbcyyqgvdoZehGS6Cyox2o.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(43, 43, 43, 0.8), rgba(43, 43, 43, 0.3));
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    max-width: 800px;
+}
+
+.hero-content h1 {
+    font-size: 4rem;
+    text-shadow: 0 2px 15px rgba(0, 0, 0, 0.4);
+    margin-bottom: 1rem;
+}
+
+.hero-content p {
+    font-size: 1.25rem;
+    font-weight: 400;
+    max-width: 600px;
+    margin: 0 auto 2rem auto;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+/* === FEATURED SECTION & MONASTERY CARDS === */
+.section-title {
+    font-size: 2.8rem;
+    text-align: center;
+    margin-bottom: 1rem;
+    color: var(--color-text-dark);
+}
+
+.section-subtitle {
+    text-align: center;
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto 4rem auto;
+}
+
+.featured-section {
+    padding: 80px 0;
+    background-color: var(--color-background);
+}
+
+.monastery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.monastery-card {
+    background-color: var(--color-surface);
+    border-radius: var(--border-radius);
+    padding: 30px;
+    box-shadow: var(--shadow-soft);
+    transition: var(--transition-fast);
+    border: 1px solid #eee;
+    display: flex;
+    flex-direction: column;
+}
+
+.monastery-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-medium);
+}
+
+.card-icon {
+    width: 50px;
+    height: 50px;
+    background-color: var(--color-secondary);
+    border-radius: 50%;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-icon span {
+    width: 24px;
+    height: 24px;
+    background-color: #fff;
+    mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5-10-5-10 5z"/></svg>');
+    /* Simple temple icon */
+    mask-repeat: no-repeat;
+    mask-position: center;
+}
+
+.monastery-card h3 {
+    margin-top: 0;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.card-description {
+    font-size: 0.95rem;
+    flex-grow: 1;
+    margin-bottom: 1.5rem;
+}
+
+.card-tags {
+    margin-bottom: 1.5rem;
+}
+
+.tag {
+    display: inline-block;
+    background-color: #f0e9d6;
+    color: #7a5c13;
+    padding: 4px 10px;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-right: 8px;
+}
+
+.card-explore-link {
+    font-weight: 600;
+    color: var(--color-primary);
+}
+
+.card-explore-link span {
+    transition: transform 0.2s ease;
+    display: inline-block;
+}
+
+.card-explore-link:hover span {
+    transform: translateX(5px);
+}
+
+.load-more-container {
+    text-align: center;
+    margin-top: 50px;
+}
+
+/* === MAP SECTION === */
+.map-section {
+    padding: 80px 0;
+    background-color: #faf8f2;
+    /* Slightly different background */
+}
+
+.map-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 40px;
+    align-items: center;
+}
+
+.map-container-wrapper {
+    height: 500px;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-medium);
+}
+
+.map-legend h3 {
+    margin-top: 0;
+    font-size: 1.8rem;
+}
+
+.map-legend ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.map-legend li {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.legend-icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    background-color: var(--color-primary);
+    mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>');
+}
+
+.map-legend li div {
+    display: flex;
+    flex-direction: column;
+}
+
+.map-legend li small {
+    font-size: 0.85rem;
+    color: var(--color-text-light);
+}
