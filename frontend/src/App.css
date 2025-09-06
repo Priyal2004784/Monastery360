@@ -134,3 +134,35 @@ button[type="submit"]:hover { background-color: #218838; }
 .edit-button:hover { background-color: #0069d9; }
 .delete-button { background-color: #dc3545; }
 .delete-button:hover { background-color: #c82333; }
+
+.directions-button {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border: none;
+  border-radius: var(--border-radius);
+  padding: 12px 24px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  font-family: var(--font-body);
+  cursor: pointer;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.directions-button:hover {
+  background-color: #0a4a50; /* A darker shade of primary */
+  transform: translateY(-2px);
+}
+
+.directions-button:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.error-message {
+  color: #dc3545; /* Red for errors */
+  font-weight: 600;
+  margin-top: 15px;
+}
