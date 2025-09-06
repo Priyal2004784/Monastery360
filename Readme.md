@@ -150,5 +150,5 @@ The main site at `http://localhost:3000` is where you can explore the monasterie
 
 Contributor
 Priyal
-Abhinav
+Abhinav Kumar
 Rohit Singh
