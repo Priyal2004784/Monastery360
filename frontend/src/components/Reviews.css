@@ -1,0 +1,83 @@
+/* === REVIEWS SECTION === */
+.reviews-section {
+  margin-top: 60px;
+  padding-top: 40px;
+  border-top: 1px solid #eee;
+}
+
+.review-list h3,
+.review-form-container h3 {
+  font-size: 1.8rem;
+  margin-top: 0;
+  margin-bottom: 30px;
+  color: var(--color-text-dark);
+}
+
+/* Review List & Cards */
+.review-card {
+  background-color: #fcfaf6;
+  border: 1px solid #f0e9d6;
+  border-radius: var(--border-radius);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.review-header strong {
+  font-size: 1.1rem;
+}
+
+.review-date {
+  font-size: 0.85rem;
+  color: var(--color-text-light);
+}
+
+.review-text {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--color-text-dark);
+}
+
+/* Review Form */
+.review-form-container {
+  margin-top: 40px;
+}
+
+.review-form input,
+.review-form textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-family: var(--font-body);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    box-sizing: border-box;
+}
+
+.review-form input:focus,
+.review-form textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(140, 58, 58, 0.2);
+}
+
+.review-form textarea {
+    min-height: 120px;
+    resize: vertical;
+    margin-bottom: 20px;
+}
+
+.review-form .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 15px;
+}

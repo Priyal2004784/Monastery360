@@ -14,8 +14,13 @@ mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log("MongoDB connection established successfully"))
     .catch(err => console.error("MongoDB connection error:", err));
 
+// --- EXISTING ROUTES ---
 const monasteriesRouter = require('./routes/monasteries');
 app.use('/monasteries', monasteriesRouter);
+
+// --- NEWLY ADDED REVIEW ROUTES ---
+const reviewsRouter = require('./routes/reviews'); // <-- 1. Import the new router
+app.use('/reviews', reviewsRouter);             // <-- 2. Tell the app to use it
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
