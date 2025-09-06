@@ -1,43 +1,43 @@
-// frontend/src/components/ProtectedRoute.js
 import React, { useState } from 'react';
 
-// This component takes the real component to render (AdminPanel) as a "child".
 function ProtectedRoute({ children }) {
-  // We'll use a simple state to track authentication.
-  // In a real app, this would be more complex (e.g., using context or tokens).
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
-  const correctPassword = "sikkim_admin"; // Our secret password
+  const correctPassword = "sikkim_admin";
 
   const handlePasswordSubmit = (e) => {
     e.preventDefault();
     if (password === correctPassword) {
       setIsAuthenticated(true);
     } else {
-      alert('Incorrect password!');
+      setError('The password you entered is incorrect. Please try again.');
       setPassword('');
     }
   };
 
-  // If the user is authenticated, show the real component (the children).
   if (isAuthenticated) {
     return children;
   }
 
-  // If not authenticated, show the login form.
   return (
-    <div className="login-container">
-      <h2>Admin Access Required</h2>
-      <form onSubmit={handlePasswordSubmit} className="login-form">
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Enter password"
-        />
-        <button type="submit">Login</button>
-      </form>
+    <div className="login-page-container">
+      <div className="login-card">
+        <h2>Admin Access Required</h2>
+        <p>This area is restricted. Please enter the password to continue.</p>
+        <form onSubmit={handlePasswordSubmit} className="login-form">
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Enter password"
+            aria-label="Admin password"
+          />
+          {error && <p className="login-error">{error}</p>}
+          <button type="submit" className="cta-button">Login</button>
+        </form>
+      </div>
     </div>
   );
 }

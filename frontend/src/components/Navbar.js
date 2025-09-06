@@ -1,18 +1,25 @@
-// frontend/src/components/Navbar.js
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 function Navbar() {
   return (
-    <nav className="navbar">
-      <Link to="/" className="nav-brand">
-        Monastery360
-      </Link>
-      <div className="nav-links">
-        <Link to="/" className="nav-link">Home</Link>
-        <Link to="/admin" className="nav-link">Admin</Link>
+    <header className="navbar">
+      <div className="container nav-container">
+        <Link to="/" className="nav-brand">
+          Monastery360
+        </Link>
+        <nav className="nav-links">
+          <NavLink to="/" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Home</NavLink>
+          <NavLink to="/monasteries" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Monasteries</NavLink>
+          <NavLink to="/pilgrimage" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Pilgrimage</NavLink>
+          <NavLink to="/culture" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Culture</NavLink>
+        </nav>
+        <div className="nav-actions">
+          <Link to="/plan-visit" className="cta-button">Plan Your Visit</Link>
+          <Link to="/admin" className="nav-link">Admin</Link>
+        </div>
       </div>
-    </nav>
+    </header>
   );
 }
 
