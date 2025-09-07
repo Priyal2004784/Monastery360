@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Map from './Map';
-import './HomePage.css'; // <-- This is the new line you are adding
+import './HomePage.css';
+import { motion } from 'framer-motion'; // Import motion
 
 function HomePage() {
   const [monasteries, setMonasteries] = useState([]);
-  const [visibleCount, setVisibleCount] = useState(6); // Show 6 initially
+  const [visibleCount, setVisibleCount] = useState(6);
 
   useEffect(() => {
     axios.get('http://localhost:5000/monasteries')
@@ -20,27 +21,71 @@ function HomePage() {
     setVisibleCount(prevCount => prevCount + 6);
   };
 
+  // Animation variants for sections
+  const sectionVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut"
+      }
+    }
+  };
+
   return (
     <div className="homepage">
-      <section className="hero-section">
+      <motion.section
+        className="hero-section"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+      >
         <div className="hero-overlay"></div>
         <div className="hero-content container">
-          <h1>Sacred Monasteries of Sikkim</h1>
-          <p>Discover the ancient Buddhist monasteries nestled in the Himalayan mountains, where spirituality and natural beauty create a transcendent experience.</p>
-          <div className="hero-buttons">
+          <motion.h1 initial={{ y: -50 }} animate={{ y: 0 }} transition={{ duration: 0.8, delay: 0.2 }}>
+            Sacred Monasteries of Sikkim
+          </motion.h1>
+          <motion.p initial={{ y: 50, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.8, delay: 0.4 }}>
+            Discover the ancient Buddhist monasteries nestled in the Himalayan mountains, where spirituality and natural beauty create a transcendent experience.
+          </motion.p>
+          <motion.div
+            className="hero-buttons"
+            initial={{ y: 50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+          >
             <a href="#featured" className="cta-button">Explore Monasteries</a>
             <a href="#plan" className="cta-button secondary">Plan Your Visit</a>
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
-      <section id="featured" className="featured-section">
+      <motion.section
+        id="featured"
+        className="featured-section"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={sectionVariants}
+      >
         <div className="container">
           <h2 className="section-title">Featured Monasteries</h2>
           <p className="section-subtitle">Explore these sacred centers of learning, meditation, and art, each with its own unique history and spiritual significance.</p>
           <div className="monastery-grid">
-            {monasteries.slice(0, visibleCount).map(monastery => (
-              <div key={monastery._id} className="monastery-card">
+            {monasteries.slice(0, visibleCount).map((monastery, index) => (
+              // Inside the .map function for monasteries in HomePage.js
+
+              <motion.div
+               key={monastery._id}
+               className="monastery-card"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                whileHover={{ y: -10, scale: 1.03, transition: { type: 'spring', stiffness: 300 } }}
+                >
                 <div className="card-icon">
                   <span role="img" aria-label="monastery icon"></span>
                 </div>
@@ -56,7 +101,7 @@ function HomePage() {
                 <Link to={`/monastery/${monastery._id}`} className="card-explore-link">
                   Explore <span>&rarr;</span>
                 </Link>
-              </div>
+              </motion.div>
             ))}
           </div>
           {visibleCount < monasteries.length && (
@@ -65,9 +110,16 @@ function HomePage() {
             </div>
           )}
         </div>
-      </section>
+      </motion.section>
 
-      <section id="map-section" className="map-section">
+      <motion.section
+        id="map-section"
+        className="map-section"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={sectionVariants}
+      >
         <div className="container">
           <h2 className="section-title">Monastery Map</h2>
           <p className="section-subtitle">Discover the sacred geography of Sikkim's monasteries and plan your spiritual journey through the Himalayan landscape.</p>
@@ -92,7 +144,7 @@ function HomePage() {
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
     </div>
   );
 }

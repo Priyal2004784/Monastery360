@@ -30,7 +30,7 @@ function ReviewForm({ monasteryId, onReviewSubmit }) {
             name="name"
             value={formData.name}
             onChange={handleInputChange}
-            placeholder="Your Name (required)"
+            placeholder="Your Name"
             required
           />
           <input
@@ -38,7 +38,7 @@ function ReviewForm({ monasteryId, onReviewSubmit }) {
             type="email"
             value={formData.email}
             onChange={handleInputChange}
-            placeholder="Your Email (optional)"
+            placeholder="Your Email"
           />
         </div>
         <textarea

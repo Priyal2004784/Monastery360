@@ -1,53 +1,87 @@
-/* === REVIEWS SECTION === */
-.reviews-section {
-  margin-top: 60px;
-  padding-top: 40px;
-  border-top: 1px solid #eee;
-}
-
+/* === REVIEWS SECTION HEADING === */
 .review-list h3,
 .review-form-container h3 {
-  font-size: 1.8rem;
-  margin-top: 0;
-  margin-bottom: 30px;
-  color: var(--color-text-dark);
+    font-size: 1.8rem;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    color: var(--color-text-dark);
 }
 
-/* Review List & Cards */
+/* === Review List & Cards === */
+.review-list {
+    max-height: 600px; /* Limit height and allow scroll */
+    overflow-y: auto;
+    padding-right: 15px;
+}
+
 .review-card {
-  background-color: #fcfaf6;
-  border: 1px solid #f0e9d6;
-  border-radius: var(--border-radius);
-  padding: 20px;
-  margin-bottom: 20px;
+    background-color: var(--color-surface);
+    border: 1px solid #f0e9d6;
+    border-radius: var(--border-radius);
+    padding: 25px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow-soft);
 }
 
 .review-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
 }
 
-.review-header strong {
-  font-size: 1.1rem;
+.review-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: var(--color-primary);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+    flex-shrink: 0;
 }
 
-.review-date {
-  font-size: 0.85rem;
-  color: var(--color-text-light);
+.review-meta {
+    flex-grow: 1;
+}
+
+.review-meta strong {
+    font-size: 1.1rem;
+    display: block;
+    color: var(--color-text-dark);
+}
+
+/* Basic star rating - can be improved with icons later */
+.review-rating {
+    color: #f5b50a;
 }
 
 .review-text {
-  margin: 0;
-  font-size: 1rem;
-  line-height: 1.7;
-  color: var(--color-text-dark);
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--color-text-dark);
+    margin-bottom: 1rem;
 }
 
-/* Review Form */
+.review-date {
+  font-size: 0.8rem;
+  color: var(--color-text-light);
+  text-align: right;
+  display: block;
+}
+
+/* === Review Form === */
 .review-form-container {
-  margin-top: 40px;
+    background: #fdfaf5;
+    padding: 40px; /* Increased padding for a larger box */
+    border-radius: var(--border-radius);
+    border: 1px solid #f0e9d6;
+    height: fit-content;
+    box-shadow: var(--shadow-soft); /* Added a subtle shadow */
 }
 
 .review-form input,
@@ -56,28 +90,28 @@
     padding: 12px 15px;
     border: 1px solid #ddd;
     border-radius: 6px;
-    font-size: 1rem;
+    font-size: 1rem; /* Slightly larger font */
     font-family: var(--font-body);
     transition: border-color 0.2s, box-shadow 0.2s;
     box-sizing: border-box;
+    margin-bottom: 15px;
 }
 
 .review-form input:focus,
 .review-form textarea:focus {
     outline: none;
     border-color: var(--color-primary);
-    box-shadow: 0 0 0 3px rgba(140, 58, 58, 0.2);
+    box-shadow: 0 0 0 3px rgba(140, 58, 58, 0.1);
 }
 
 .review-form textarea {
-    min-height: 120px;
+    min-height: 150px; /* Increased height for the text area */
     resize: vertical;
-    margin-bottom: 20px;
 }
 
-.review-form .form-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-    margin-bottom: 15px;
+.review-form .cta-button {
+    width: 100%;
+    padding: 15px; /* Made button larger */
+    font-size: 1.1rem;
 }
+
