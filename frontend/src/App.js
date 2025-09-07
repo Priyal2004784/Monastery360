@@ -7,17 +7,21 @@ import HomePage from './components/HomePage';
 import MonasteryDetail from './components/MonasteryDetail';
 import AdminPanel from './components/AdminPanel';
 import ProtectedRoute from './components/ProtectedRoute';
-import Footer from './components/Footer'; // Import the new Footer
+import Footer from './components/Footer';
+import Pilgrimage from './components/Pilgrimage';
+import Culture from './components/Culture'; // <-- 1. IMPORT THE NEW COMPONENT
 
 function App() {
   return (
     <Router>
       <div className="App">
         <Navbar />
-        <main> {/* Add a main tag to wrap content */}
+        <main>
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/monastery/:id" element={<MonasteryDetail />} />
+            <Route path="/pilgrimage" element={<Pilgrimage />} />
+            <Route path="/culture" element={<Culture />} /> {/* <-- 2. ADD THE NEW ROUTE */}
             <Route 
               path="/admin" 
               element={
@@ -28,7 +32,7 @@ function App() {
             />
           </Routes>
         </main>
-        <Footer /> {/* Add the Footer here */}
+        <Footer />
       </div>
     </Router>
   );
