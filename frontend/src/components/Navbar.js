@@ -11,6 +11,7 @@ function Navbar() {
         </Link>
         <nav className="nav-links">
           <NavLink to="/" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Home</NavLink>
+          <NavLink to="/monasteries" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Monasteries</NavLink>
           <NavLink to="/pilgrimage" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Pilgrimage</NavLink>
           <NavLink to="/culture" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Culture</NavLink>
         </nav>
