@@ -31,6 +31,7 @@ body {
   color: var(--color-text-dark);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  line-height: 1.7;
 }
 
 .App {
@@ -51,11 +52,12 @@ h5,
 h6 {
   font-family: var(--font-heading);
   font-weight: 700;
+  color: var(--color-text-dark);
 }
 
 p {
-  line-height: 1.7;
   color: var(--color-text-light);
+  font-size: 1rem;
 }
 
 a {
@@ -68,9 +70,10 @@ a:hover {
   opacity: 0.8;
 }
 
+/* === Find and replace this entire rule in App.css === */
 .container {
   width: 90%;
-  max-width: 1200px;
+  max-width: 1500px; /* Increased from 1200px */
   margin: 0 auto;
 }
 
@@ -104,28 +107,7 @@ a:hover {
   border-color: var(--color-surface);
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .hero-content h1 {
-    font-size: 2.5rem;
-  }
-
-  .map-layout {
-    grid-template-columns: 1fr;
-  }
-
-  .footer-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .nav-links,
-  .nav-actions .cta-button {
-    display: none;
-  }
-}
-
-@media (max-width: 480px) {
-  .footer-grid {
-    grid-template-columns: 1fr;
-  }
+.cta-button.secondary:hover {
+  background-color: var(--color-surface);
+  color: var(--color-primary);
 }

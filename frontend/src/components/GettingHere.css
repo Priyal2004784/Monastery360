@@ -1,0 +1,27 @@
+/* === Getting Here Section === */
+.getting-here-section {
+    margin-top: 40px;
+}
+
+.getting-here-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.transport-mode {
+    background-color: #faf8f2;
+    padding: 20px;
+    border-radius: var(--border-radius);
+    border: 1px solid #f0e9d6;
+}
+
+.transport-mode h4 {
+    margin-top: 0;
+    font-size: 1.2rem;
+    color: var(--color-text-dark);
+}
+
+.transport-mode p {
+    margin-bottom: 0;
+}

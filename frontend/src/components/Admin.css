@@ -174,7 +174,6 @@
     margin-bottom: 30px;
 }
 
-/* --- THIS IS THE SECTION TO REPLACE --- */
 .login-form input {
     width: 100%;
     padding: 12px 15px;
@@ -193,8 +192,6 @@
     border-color: var(--color-primary);
     box-shadow: 0 0 0 3px rgba(140, 58, 58, 0.2);
 }
-
-/* ------------------------------------ */
 
 .login-form .cta-button {
     width: 100%;

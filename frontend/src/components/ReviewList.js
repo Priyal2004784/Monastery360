@@ -9,14 +9,18 @@ function ReviewList({ reviews }) {
 
   return (
     <div className="review-list">
-      <h3>Visitor Reviews & Suggestions</h3>
+      <h3 className="section-heading">Visitor Reviews</h3>
       {reviews.length === 0 ? (
         <p>Be the first to leave a review for this monastery.</p>
       ) : (
         reviews.map(review => (
           <div key={review._id} className="review-card">
             <div className="review-header">
-              <strong>{review.name}</strong>
+              <div className="review-author">
+                <strong>{review.name}</strong>
+                {/* Note: Added static stars for visual representation */}
+                <span className="review-stars">★★★★★</span>
+              </div>
               <span className="review-date">{formatDate(review.createdAt)}</span>
             </div>
             <p className="review-text">{review.reviewText}</p>
