@@ -5,26 +5,25 @@ import PannellumViewer from './PannellumViewer';
 import ReviewList from './ReviewList';
 import ReviewForm from './ReviewForm';
 import GettingHere from './GettingHere';
-import PhotoGallery from './PhotoGallery'; // 1. IMPORT THE NEW COMPONENT
+import PhotoGallery from './PhotoGallery';
 import './MonasteryDetail.css';
 import './Reviews.css';
 import './GettingHere.css';
-import './PhotoGallery.css'; // 2. IMPORT THE NEW CSS
+import './PhotoGallery.css';
 
 function MonasteryDetail() {
   const [monastery, setMonastery] = useState(null);
   const [reviews, setReviews] = useState([]);
   const [loadingLocation, setLoadingLocation] = useState(false);
   const [locationError, setLocationError] = useState('');
+  const [activeTab, setActiveTab] = useState('overview'); // To manage tabs
   const { id } = useParams();
 
   useEffect(() => {
-    // Fetch monastery details
     axios.get(`http://localhost:5000/monasteries/${id}`)
       .then(response => { setMonastery(response.data); })
       .catch(error => { console.error('Error fetching monastery details!', error); });
 
-    // Fetch reviews for this monastery
     axios.get(`http://localhost:5000/reviews/${id}`)
       .then(response => { setReviews(response.data); })
       .catch(error => { console.error('Error fetching reviews!', error); });
@@ -74,65 +73,92 @@ function MonasteryDetail() {
     return <div className="container" style={{ textAlign: 'center', paddingTop: '100px' }}><h2>Loading Monastery...</h2></div>;
   }
 
+  // Helper to render the content based on the active tab
+  const renderTabContent = () => {
+    switch (activeTab) {
+      case 'overview':
+        return (
+          <div className="tab-content">
+            <h3 className="section-heading">History & Heritage</h3>
+            <p className="history-text">{monastery.history}</p>
+            <PhotoGallery imageUrl={monastery.panoImage_url} />
+          </div>
+        );
+      case '360view':
+        return (
+          <div className="tab-content">
+             <h3 className="section-heading">360° Virtual Tour</h3>
+            {monastery.panoImage_url ? (
+              <PannellumViewer image={monastery.panoImage_url} />
+            ) : (
+              <p>A 360° view is not available for this monastery yet.</p>
+            )}
+          </div>
+        );
+      case 'reviews':
+        return (
+          <div className="tab-content reviews-section">
+            <ReviewList reviews={reviews} />
+            <ReviewForm monasteryId={id} onReviewSubmit={handleReviewSubmit} />
+          </div>
+        );
+      case 'location':
+        return (
+          <div className="tab-content">
+            <GettingHere />
+            <button
+              className="directions-button"
+              onClick={handleGetDirections}
+              disabled={loadingLocation}
+            >
+              {loadingLocation ? 'Locating...' : 'Get Me There'}
+            </button>
+            {locationError && <p className="error-message">{locationError}</p>}
+          </div>
+        );
+      default:
+        return null;
+    }
+  };
+
   return (
     <div className="detail-page-container">
-      <div className="container">
-        <Link to="/" className="back-link">← Back to Home</Link>
-        <div className="detail-card">
-
-          <div className="detail-header">
+       <div className="detail-hero" style={{backgroundImage: `url(${monastery.panoImage_url || 'https://as1.ftcdn.net/jpg/03/77/74/82/1000_F_377748272_90xLI43qaegbcyyqgvdoZehGS6Cyox2o.jpg'})`}}>
+        <div className="detail-hero-overlay"></div>
+        <div className="container detail-header">
             <h1>{monastery.name}</h1>
-            <p className="district-info">{monastery.district}</p>
+            <p className="district-info">{monastery.district}, Sikkim</p>
+        </div>
+      </div>
+
+      <div className="container">
+        <div className="detail-card">
+          <div className="detail-tabs">
+            <button onClick={() => setActiveTab('overview')} className={activeTab === 'overview' ? 'active' : ''}>Overview</button>
+            <button onClick={() => setActiveTab('360view')} className={activeTab === '360view' ? 'active' : ''}>360° View</button>
+            <button onClick={() => setActiveTab('reviews')} className={activeTab === 'reviews' ? 'active' : ''}>Reviews</button>
+            <button onClick={() => setActiveTab('location')} className={activeTab === 'location' ? 'active' : ''}>Location & Directions</button>
           </div>
 
           <div className="info-grid">
             <div className="info-box">
-              <span className="info-title">Founded</span>
-              <span className="info-value">1642 AD</span>
+                <span className="info-title">Founded</span>
+                <span className="info-value">1730 CE (Example)</span>
             </div>
             <div className="info-box">
-              <span className="info-title">Visiting Hours</span>
-              <span className="info-value">9:00 AM - 5:00 PM</span>
+                <span className="info-title">Visiting Hours</span>
+                <span className="info-value">9:00 AM - 6:00 PM</span>
             </div>
             <div className="info-box">
-              <span className="info-title">Location</span>
-              <span className="info-value">{monastery.district}, Sikkim</span>
+                <span className="info-title">Buddhist Sect</span>
+                <span className="info-value">{monastery.tags.includes('Nyingma') ? 'Nyingma' : 'Kagyu'}</span>
             </div>
           </div>
-
-          {monastery.panoImage_url && (
-            <div className="pannellum-container">
-              <PannellumViewer image={monastery.panoImage_url} />
-            </div>
-          )}
-
-          {/* 3. ADD THE GALLERY COMPONENT */}
-          <PhotoGallery imageUrl={monastery.panoImage_url} />
-
-          <h3 className="section-heading">History & Heritage</h3>
-          <p className="history-text">{monastery.history}</p>
-
-          <div className="tags-container">
-            <strong>Tags:</strong> {monastery.tags.join(', ')}
-          </div>
-
-          <button
-            className="directions-button"
-            onClick={handleGetDirections}
-            disabled={loadingLocation}
-          >
-            {loadingLocation ? 'Locating...' : 'Get Directions'}
-          </button>
-          {locationError && <p className="error-message">{locationError}</p>}
-
-          <GettingHere />
-
-          <div className="reviews-section">
-            <ReviewList reviews={reviews} />
-            <ReviewForm monasteryId={id} onReviewSubmit={handleReviewSubmit} />
-          </div>
+          
+          {renderTabContent()}
 
         </div>
+        <Link to="/" className="back-link-bottom">← Back to All Monasteries</Link>
       </div>
     </div>
   );
