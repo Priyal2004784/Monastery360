@@ -1,26 +1,40 @@
-// Simplified frontend/src/components/MonasteryList.js
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-function MonasteryList({ allMonasteries }) { // It now receives data as a "prop"
+function MonasteryList({ allMonasteries }) {
   const [searchTerm, setSearchTerm] = useState('');
+  const [filteredMonasteries, setFilteredMonasteries] = useState(allMonasteries);
 
-  const filteredMonasteries = allMonasteries.filter(monastery =>
-    monastery.tags.some(tag =>
-      tag.toLowerCase().includes(searchTerm.toLowerCase())
-    )
-  );
+  const handleSearch = () => {
+    const lowercasedTerm = searchTerm.toLowerCase();
+    const results = allMonasteries.filter(monastery =>
+      monastery.tags.some(tag =>
+        tag.toLowerCase().includes(lowercasedTerm)
+      )
+    );
+    setFilteredMonasteries(results);
+  };
+
+  const handleInputChange = (e) => {
+    setSearchTerm(e.target.value);
+    if (e.target.value === '') {
+      setFilteredMonasteries(allMonasteries);
+    }
+  };
 
   return (
     <div className="list-container">
       <h2>Find a Monastery</h2>
-      <input
-        type="text"
-        placeholder="Search by tag to filter the list..."
-        className="search-bar"
-        value={searchTerm}
-        onChange={e => setSearchTerm(e.target.value)}
-      />
+      <div className="search-container">
+        <input
+          type="text"
+          placeholder="Search by tag to filter the list..."
+          className="search-bar"
+          value={searchTerm}
+          onChange={handleInputChange}
+        />
+        <button onClick={handleSearch} className="search-button">Search</button>
+      </div>
       <div className="monastery-list">
         {filteredMonasteries.map(monastery => (
           <div key={monastery._id} className="monastery-card">

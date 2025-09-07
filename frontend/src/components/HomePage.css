@@ -10,7 +10,6 @@
     background-image: url('https://as1.ftcdn.net/jpg/03/77/74/82/1000_F_377748272_90xLI43qaegbcyyqgvdoZehGS6Cyox2o.jpg');
     background-size: cover;
     background-position: top center;
-    /* Changed from 'center' to 'top center' */
     text-align: center;
 }
 
@@ -63,14 +62,19 @@
     margin: 0 auto 4rem auto;
 }
 
-.featured-section {
+.featured-section, .map-section {
     padding: 80px 0;
+    border-radius: 20px; /* Rounded corners for sections */
+    transition: box-shadow 0.4s ease-out, transform 0.4s ease-out; /* Smooth transition for hover */
+    margin: 40px 0;
 }
 
-/* === MONASTERY CARDS === */
+
+/* === MONASTERY CARDS (UPDATED) === */
 .monastery-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    /* This creates 2 rows of 3 columns, then wraps */
+    grid-template-columns: repeat(3, 1fr);
     gap: 30px;
 }
 
@@ -78,16 +82,23 @@
     background-color: var(--color-surface);
     border-radius: var(--border-radius);
     padding: 30px;
-    box-shadow: var(--shadow-soft);
-    transition: var(--transition-fast);
     border: 1px solid #EAE4D7;
     display: flex;
     flex-direction: column;
+    text-align: left; /* Align text to the left */
+    box-shadow: var(--shadow-soft); /* Initial shadow */
+    will-change: transform, box-shadow; /* Performance optimization */
 }
 
-.monastery-card:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--shadow-medium);
+.card-icon {
+    width: 50px;
+    height: 50px;
+    background-color: #f0e9d6;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
 }
 
 .monastery-card h3 {
@@ -101,10 +112,15 @@
     font-size: 0.95rem;
     flex-grow: 1;
     margin-bottom: 1.5rem;
+    min-height: 80px; /* Ensure cards have similar height */
+}
+
+.card-footer {
+    margin-top: auto; /* Push footer to the bottom */
 }
 
 .card-tags {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem; /* Space between tags and link */
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
@@ -142,7 +158,6 @@
 
 /* === MAP SECTION === */
 .map-section {
-    padding: 80px 0;
     background-color: #faf8f2;
 }
 
@@ -193,4 +208,23 @@
 .map-legend li small {
     font-size: 0.85rem;
     color: var(--color-text-light);
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 992px) {
+    .monastery-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .map-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .monastery-grid {
+        grid-template-columns: 1fr;
+    }
+    .hero-content h1 {
+        font-size: 3rem;
+    }
 }
