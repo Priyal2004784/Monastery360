@@ -4,8 +4,12 @@ import { useParams, Link } from 'react-router-dom';
 import PannellumViewer from './PannellumViewer';
 import ReviewList from './ReviewList';
 import ReviewForm from './ReviewForm';
+import GettingHere from './GettingHere';
+import PhotoGallery from './PhotoGallery'; // 1. IMPORT THE NEW COMPONENT
 import './MonasteryDetail.css';
 import './Reviews.css';
+import './GettingHere.css';
+import './PhotoGallery.css'; // 2. IMPORT THE NEW CSS
 
 function MonasteryDetail() {
   const [monastery, setMonastery] = useState(null);
@@ -39,10 +43,7 @@ function MonasteryDetail() {
         const userLng = position.coords.longitude;
         const monasteryLat = monastery.coordinates.lat;
         const monasteryLng = monastery.coordinates.lng;
-
-        // --- THIS IS THE CORRECTED LINE ---
         const googleMapsUrl = `https://www.google.com/maps/dir/?api=1&origin=${userLat},${userLng}&destination=${monasteryLat},${monasteryLng}`;
-
         window.open(googleMapsUrl, '_blank');
         setLoadingLocation(false);
       },
@@ -56,7 +57,7 @@ function MonasteryDetail() {
       }
     );
   };
-  
+
   const handleReviewSubmit = (reviewData) => {
     axios.post('http://localhost:5000/reviews/add', reviewData)
       .then(response => {
@@ -70,35 +71,68 @@ function MonasteryDetail() {
   };
 
   if (!monastery) {
-    return <h2>Loading...</h2>;
+    return <div className="container" style={{ textAlign: 'center', paddingTop: '100px' }}><h2>Loading Monastery...</h2></div>;
   }
 
   return (
-    <div className="detail-container">
-      <Link to="/" className="back-link">← Back to Home</Link>
-      <h1>{monastery.name}</h1>
-      <button
-        className="directions-button"
-        onClick={handleGetDirections}
-        disabled={loadingLocation}
-      >
-        {loadingLocation ? 'Locating...' : 'Take Me There'}
-      </button>
-      {locationError && <p className="error-message">{locationError}</p>}
+    <div className="detail-page-container">
+      <div className="container">
+        <Link to="/" className="back-link">← Back to Home</Link>
+        <div className="detail-card">
 
-      {monastery.panoImage_url && (
-        <div className="pannellum-container">
-          <PannellumViewer image={monastery.panoImage_url} />
+          <div className="detail-header">
+            <h1>{monastery.name}</h1>
+            <p className="district-info">{monastery.district}</p>
+          </div>
+
+          <div className="info-grid">
+            <div className="info-box">
+              <span className="info-title">Founded</span>
+              <span className="info-value">1642 AD</span>
+            </div>
+            <div className="info-box">
+              <span className="info-title">Visiting Hours</span>
+              <span className="info-value">9:00 AM - 5:00 PM</span>
+            </div>
+            <div className="info-box">
+              <span className="info-title">Location</span>
+              <span className="info-value">{monastery.district}, Sikkim</span>
+            </div>
+          </div>
+
+          {monastery.panoImage_url && (
+            <div className="pannellum-container">
+              <PannellumViewer image={monastery.panoImage_url} />
+            </div>
+          )}
+
+          {/* 3. ADD THE GALLERY COMPONENT */}
+          <PhotoGallery imageUrl={monastery.panoImage_url} />
+
+          <h3 className="section-heading">History & Heritage</h3>
+          <p className="history-text">{monastery.history}</p>
+
+          <div className="tags-container">
+            <strong>Tags:</strong> {monastery.tags.join(', ')}
+          </div>
+
+          <button
+            className="directions-button"
+            onClick={handleGetDirections}
+            disabled={loadingLocation}
+          >
+            {loadingLocation ? 'Locating...' : 'Get Directions'}
+          </button>
+          {locationError && <p className="error-message">{locationError}</p>}
+
+          <GettingHere />
+
+          <div className="reviews-section">
+            <ReviewList reviews={reviews} />
+            <ReviewForm monasteryId={id} onReviewSubmit={handleReviewSubmit} />
+          </div>
+
         </div>
-      )}
-
-      <p><strong>District:</strong> {monastery.district}</p>
-      <p className="history-text">{monastery.history}</p>
-      <p><strong>Tags:</strong> {monastery.tags.join(', ')}</p>
-
-      <div className="reviews-section">
-        <ReviewList reviews={reviews} />
-        <ReviewForm monasteryId={id} onReviewSubmit={handleReviewSubmit} />
       </div>
     </div>
   );
