@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-// Import motion from framer-motion and hooks for scroll animations
 import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import Map from './Map';
 import './HomePage.css';
+
+// Array of background images for the hero slider
+const heroImages = [
+  "https://www.adventurenation.com/blog/wp-content/uploads/2014/09/Sikkim-2-3.jpg",
+  "https://upload.wikimedia.org/wikipedia/commons/b/b3/Sunrise_over_Kangchenjunga.jpg",
+  "https://upload.wikimedia.org/wikipedia/commons/d/d1/Gurudongmar.Lake.jpg",
+  "https://upload.wikimedia.org/wikipedia/commons/9/91/Ravangla_Buddha_Park%2C_Sikkim.jpg"
+];
 
 // A reusable component to animate sections when they scroll into view
 const AnimatedSection = ({ children, className, id }) => {
@@ -48,6 +55,7 @@ function HomePage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredMonasteries, setFilteredMonasteries] = useState([]);
   const [visibleCount, setVisibleCount] = useState(6);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
     axios.get('http://localhost:5000/monasteries')
@@ -68,6 +76,15 @@ function HomePage() {
     );
     setFilteredMonasteries(results);
   }, [searchTerm, monasteries]);
+  
+  // New effect for the auto-sliding hero background
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex(prevIndex => (prevIndex + 1) % heroImages.length);
+    }, 5000); // Change image every 5 seconds
+
+    return () => clearInterval(interval); // Cleanup on unmount
+  }, []);
 
 
   const handleInputChange = (e) => {
@@ -86,8 +103,11 @@ function HomePage() {
 
   return (
     <div className="homepage">
-      {/* HERO SECTION */}
-      <section className="hero-section">
+      {/* HERO SECTION - Now with dynamic style for background image */}
+      <section 
+        className="hero-section"
+        style={{ backgroundImage: `url('${heroImages[currentImageIndex]}')` }}
+      >
         <div className="hero-overlay"></div>
         <div className="hero-content container">
           <motion.h1 initial={{ opacity: 0, y: -30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.2 }}>Sacred Monasteries of Sikkim</motion.h1>

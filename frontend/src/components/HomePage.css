@@ -1,4 +1,4 @@
-/* === HERO SECTION === */
+/* === HERO SECTION (UPDATED FOR DULLER TEXT) === */
 .hero-section {
     position: relative;
     height: 80vh;
@@ -7,16 +7,17 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-image: url('https://as1.ftcdn.net/jpg/03/77/74/82/1000_F_377748272_90xLI43qaegbcyyqgvdoZehGS6Cyox2o.jpg');
     background-size: cover;
-    background-position: top center;
+    background-position: center;
     text-align: center;
+    transition: background-image 1.5s ease-in-out; /* Smooth cross-fade transition */
 }
 
 .hero-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.4));
+    /* Lighter overlay to make the background image brighter */
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3));
 }
 
 .hero-content {
@@ -29,7 +30,8 @@
     font-size: 4rem;
     text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
     margin-bottom: 1rem;
-    color: var(--color-surface);
+    /* Duller text for less brightness */
+    color: rgba(255, 255, 255, 0.8);
 }
 
 .hero-content p {
@@ -37,13 +39,60 @@
     font-weight: 400;
     max-width: 600px;
     margin: 0 auto 2rem auto;
-    color: rgba(255, 255, 255, 0.95);
+    /* Duller paragraph text */
+    color: rgba(255, 255, 255, 0.75);
 }
 
 .hero-buttons {
     display: flex;
     gap: 20px;
     justify-content: center;
+}
+
+
+/* === SEARCH BAR (NEW & IMPROVED) === */
+.search-container {
+    position: relative;
+    max-width: 700px;
+    margin: 0 auto 50px auto; /* Centered with bottom margin */
+}
+
+.search-bar {
+    width: 100%;
+    padding: 18px 25px 18px 60px; /* Increased left padding for icon */
+    font-size: 1.1rem;
+    font-family: var(--font-body);
+    border-radius: 50px; /* Pill shape */
+    border: 1px solid #EAE4D7;
+    background-color: var(--color-surface);
+    box-shadow: var(--shadow-soft);
+    transition: all 0.3s ease-in-out;
+    box-sizing: border-box; /* Ensures padding is included in width */
+    color: var(--color-text-dark);
+}
+
+.search-bar::placeholder {
+    color: #a0a0a0;
+    font-weight: 400;
+}
+
+.search-bar:focus {
+    outline: none;
+    border-color: var(--color-secondary);
+    box-shadow: 0 0 0 4px rgba(200, 155, 63, 0.25);
+}
+
+/* Search Icon using pseudo-element */
+.search-container::before {
+    content: '🔍';
+    position: absolute;
+    left: 25px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.3rem;
+    opacity: 0.4;
+    pointer-events: none; /* Allows clicking through the icon */
+    z-index: 2;
 }
 
 
