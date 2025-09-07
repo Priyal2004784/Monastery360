@@ -45,15 +45,34 @@ const AnimatedSection = ({ children, className, id }) => {
 
 function HomePage() {
   const [monasteries, setMonasteries] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filteredMonasteries, setFilteredMonasteries] = useState([]);
   const [visibleCount, setVisibleCount] = useState(6);
 
   useEffect(() => {
     axios.get('http://localhost:5000/monasteries')
       .then(response => {
         setMonasteries(response.data);
+        setFilteredMonasteries(response.data);
       })
       .catch(error => console.error("Error fetching data:", error));
   }, []);
+  
+  // This useEffect hook will run whenever the search term changes
+  useEffect(() => {
+    const lowercasedTerm = searchTerm.toLowerCase();
+    const results = monasteries.filter(monastery =>
+      monastery.tags.some(tag =>
+        tag.toLowerCase().includes(lowercasedTerm)
+      )
+    );
+    setFilteredMonasteries(results);
+  }, [searchTerm, monasteries]);
+
+
+  const handleInputChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
 
   const loadMore = () => {
     setVisibleCount(prevCount => prevCount + 6);
@@ -85,6 +104,17 @@ function HomePage() {
         <div className="container">
           <h2 className="section-title">Featured Monasteries</h2>
           <p className="section-subtitle">Explore these sacred centers of learning, meditation, and art, each with its own unique history and spiritual significance.</p>
+
+          <div className="search-container">
+            <input
+              type="text"
+              placeholder="Search by tag to filter the list..."
+              className="search-bar"
+              value={searchTerm}
+              onChange={handleInputChange}
+            />
+          </div>
+
           <motion.div
             className="monastery-grid"
             initial="hidden"
@@ -97,7 +127,7 @@ function HomePage() {
               },
             }}
           >
-            {monasteries.slice(0, visibleCount).map(monastery => (
+            {filteredMonasteries.slice(0, visibleCount).map(monastery => (
               <motion.div
                 key={monastery._id}
                 className="monastery-card"
@@ -130,7 +160,7 @@ function HomePage() {
               </motion.div>
             ))}
           </motion.div>
-          {visibleCount < monasteries.length && (
+          {visibleCount < filteredMonasteries.length && (
             <div className="load-more-container">
               <button onClick={loadMore} className="cta-button">Load More</button>
             </div>

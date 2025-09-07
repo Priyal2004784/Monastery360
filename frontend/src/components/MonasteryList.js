@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react'; // Import useEffect
 import { Link } from 'react-router-dom';
 
 function MonasteryList({ allMonasteries }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredMonasteries, setFilteredMonasteries] = useState(allMonasteries);
+
+  // Add this useEffect hook
+  useEffect(() => {
+    setFilteredMonasteries(allMonasteries);
+  }, [allMonasteries]);
 
   const handleSearch = () => {
     const lowercasedTerm = searchTerm.toLowerCase();
