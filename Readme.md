@@ -3,6 +3,9 @@
 Monastery360 is a full-stack MERN application designed to digitize, showcase, and preserve the rich cultural heritage of Sikkim's monasteries. It provides an immersive platform for tourists, researchers, and spiritual explorers to discover these treasures.
 
 <!-- Add a screenshot of your running application's homepage here! -->
+
+<img width="2560" height="1118" alt="Screenshot (25)" src="https://github.com/user-attachments/assets/7e19cb25-3f58-4bd6-b00a-15925876c06f" />
+
 <!-- Example: ![Monastery360 Homepage](link-to-your-screenshot.png) -->
 
 ---
