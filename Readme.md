@@ -9,6 +9,7 @@ Monastery360 is a full-stack MERN application designed to digitize, showcase, an
 <!-- Example: ![Monastery360 Homepage](link-to-your-screenshot.png) -->
 
 ---
+<img width="2536" height="1230" alt="Screenshot (26)" src="https://github.com/user-attachments/assets/a86b4019-e464-4867-b2d6-4bf6970bec1f" />
 
 ## Features
 
