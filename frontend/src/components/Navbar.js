@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import './Navbar.css'; // <-- This is the new line you are adding
+import './Navbar.css';
 
 function Navbar() {
   return (
@@ -11,12 +11,11 @@ function Navbar() {
         </Link>
         <nav className="nav-links">
           <NavLink to="/" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Home</NavLink>
-          
           <NavLink to="/pilgrimage" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Pilgrimage</NavLink>
           <NavLink to="/culture" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Culture</NavLink>
         </nav>
         <div className="nav-actions">
-          <Link to="/plan-visit" className="cta-button">Plan Your Visit</Link>
+          <Link to="/signin" className="cta-button">Plan your Visit </Link>
           <Link to="/admin" className="nav-link">Admin</Link>
         </div>
       </div>

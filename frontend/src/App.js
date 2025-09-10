@@ -9,7 +9,10 @@ import AdminPanel from './components/AdminPanel';
 import ProtectedRoute from './components/ProtectedRoute';
 import Footer from './components/Footer';
 import Pilgrimage from './components/Pilgrimage';
-import Culture from './components/Culture'; // <-- 1. IMPORT THE NEW COMPONENT
+import Culture from './components/Culture';
+import SignUp from './components/SignUp';
+import SignIn from './components/SignIn';
+import PlanVisit from './components/PlanVisit'; // <-- IMPORT THE NEW COMPONENT
 
 function App() {
   return (
@@ -21,14 +24,17 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/monastery/:id" element={<MonasteryDetail />} />
             <Route path="/pilgrimage" element={<Pilgrimage />} />
-            <Route path="/culture" element={<Culture />} /> {/* <-- 2. ADD THE NEW ROUTE */}
-            <Route 
-              path="/admin" 
+            <Route path="/culture" element={<Culture />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/plan-visit" element={<PlanVisit />} /> {/* <-- ADD THE NEW ROUTE */}
+            <Route
+              path="/admin"
               element={
                 <ProtectedRoute>
                   <AdminPanel />
                 </ProtectedRoute>
-              } 
+              }
             />
           </Routes>
         </main>
