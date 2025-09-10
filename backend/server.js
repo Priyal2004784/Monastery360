@@ -19,8 +19,12 @@ const monasteriesRouter = require('./routes/monasteries');
 app.use('/monasteries', monasteriesRouter);
 
 // --- NEWLY ADDED REVIEW ROUTES ---
-const reviewsRouter = require('./routes/reviews'); // <-- 1. Import the new router
-app.use('/reviews', reviewsRouter);             // <-- 2. Tell the app to use it
+const reviewsRouter = require('./routes/reviews');
+app.use('/reviews', reviewsRouter);
+
+// --- NEWLY ADDED USER ROUTES ---
+const usersRouter = require('./routes/users');
+app.use('/users', usersRouter);
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
