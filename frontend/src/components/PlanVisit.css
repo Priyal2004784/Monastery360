@@ -1,0 +1,72 @@
+.plan-visit-page {
+  padding: 60px 0;
+  background-color: #f9f7f3;
+}
+
+.page-title {
+  text-align: center;
+  font-size: 2.8rem;
+  color: var(--color-primary);
+  margin-bottom: 1rem;
+}
+
+.page-subtitle {
+  text-align: center;
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 0 auto 50px auto;
+}
+
+.packages-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.package-card {
+  background-color: var(--color-surface);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.package-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.package-info {
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.package-info h3 {
+  margin-top: 0;
+  color: var(--color-primary);
+}
+
+.package-duration {
+  font-size: 0.9rem;
+  color: var(--color-text-light);
+  margin-bottom: 15px;
+}
+
+.package-footer {
+  margin-top: auto;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.package-price {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--color-text-dark);
+}
